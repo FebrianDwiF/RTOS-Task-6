@@ -10,7 +10,7 @@ Proyek ini adalah implementasi kontrol LED multi-thread pada STM32 menggunakan F
 ## Fitur Utama
 - **Task Hijau (GreenLEDTask)**: Mengontrol LED hijau dengan pola kedipan setiap 0,5 detik.
 - **Task Merah (RedLEDTask)**: Mengontrol LED merah dengan pola kedipan setiap 0,1 detik.
-- **Deteksi Interferensi**: LED biru menyala ketika ada konflik dalam akses data bersama.
+- **Deteksi Interferensi**: LED kuning menyala ketika ada konflik dalam akses data bersama.
 
 ## Struktur Task
 
@@ -32,7 +32,7 @@ Proyek ini adalah implementasi kontrol LED multi-thread pada STM32 menggunakan F
 - LED hijau, merah, dan biru dihubungkan pada `GPIOA`:
   - **GPIO_PIN_0** untuk LED hijau
   - **GPIO_PIN_1** untuk LED merah
-  - **GPIO_PIN_2** untuk LED biru (indikator interferensi)
+  - **GPIO_PIN_2** untuk LED kuning (indikator interferensi)
 - Konfigurasi pin sebagai output push-pull tanpa pull-up/pull-down resistor.
 
 ## Fungsi Utama
@@ -40,7 +40,7 @@ Proyek ini adalah implementasi kontrol LED multi-thread pada STM32 menggunakan F
 ### `accessSharedData`
 - **Deskripsi:** Mengelola akses ke data bersama antara `GreenLEDTask` dan `RedLEDTask`.
   - Jika `startFlag` bernilai 1, task diizinkan mengakses data dan flag diatur menjadi 0.
-  - Jika task lain mencoba mengakses data ketika `startFlag` bernilai 0, LED biru akan menyala untuk menandai interferensi.
+  - Jika task lain mencoba mengakses data ketika `startFlag` bernilai 0, LED kuning akan menyala untuk menandai interferensi.
   - Setelah selesai, `startFlag` diatur kembali menjadi 1, dan LED biru dimatikan.
   
 ### `SystemClock_Config`
