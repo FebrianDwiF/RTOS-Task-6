@@ -43,13 +43,12 @@ Dengan langkah berikut:
 
 Kode di setiap task telah dimodifikasi agar mengikuti langkah ini untuk memastikan bahwa hanya satu task yang mengakses data bersama pada satu waktu. Akibatnya, LED biru yang berfungsi sebagai indikator interferensi tidak akan menyala, karena tidak akan ada lagi konflik.
 
-[Dokumentasi tambahan tentang `taskENTER_CRITICAL` dan `taskEXIT_CRITICAL` dari FreeRTOS](http://www.freertos.org/taskENTER_CRITICAL_taskEXIT_CRITICAL.html).
 
 ## Konfigurasi GPIO
 - LED hijau, merah, dan biru dihubungkan pada `GPIOA`:
   - **GPIO_PIN_0** untuk LED hijau
   - **GPIO_PIN_1** untuk LED merah
-  - **GPIO_PIN_2** untuk LED biru (indikator interferensi)
+  - **GPIO_PIN_2** untuk LED kuning (indikator interferensi)
 - Konfigurasi pin sebagai output push-pull tanpa pull-up/pull-down resistor.
 
 ## Fungsi Utama
@@ -58,7 +57,7 @@ Kode di setiap task telah dimodifikasi agar mengikuti langkah ini untuk memastik
 - **Deskripsi:** Mengelola akses ke data bersama antara `GreenLEDTask` dan `RedLEDTask` dalam critical section.
   - Jika `startFlag` bernilai 1, task diizinkan mengakses data dan flag diatur menjadi 0.
   - Jika task lain mencoba mengakses data ketika `startFlag` bernilai 0, LED biru akan menyala untuk menandai interferensi.
-  - Setelah selesai, `startFlag` diatur kembali menjadi 1, dan LED biru dimatikan.
+  - Setelah selesai, `startFlag` diatur kembali menjadi 1, dan LED kuning dimatikan.
 
 ### `SystemClock_Config`
 - Menggunakan HSI (High Speed Internal) clock dengan frekuensi rendah tanpa PLL untuk kesederhanaan.
