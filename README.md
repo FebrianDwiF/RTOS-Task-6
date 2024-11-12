@@ -78,4 +78,6 @@ Kode di setiap task telah dimodifikasi agar mengikuti langkah ini untuk memastik
 
 ## Catatan Tambahan
 - Critical section menggunakan `taskENTER_CRITICAL` dan `taskEXIT_CRITICAL` memastikan bahwa task memiliki akses eksklusif ke data bersama tanpa interferensi.
-- Karena tidak ada lagi konflik akses data, LED biru tidak akan menyala.
+- Karena tidak ada lagi konflik akses data, LED kuning tidak akan menyala.
+
+https://github.com/user-attachments/assets/b73f0831-d189-440d-bf02-6f8510b37d58
