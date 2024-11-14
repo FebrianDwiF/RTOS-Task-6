@@ -1,7 +1,3 @@
-Berikut adalah template README dengan penjelasan tentang penggunaan fungsi `taskENTER_CRITICAL` dan `taskEXIT_CRITICAL` dari FreeRTOS untuk mengelola akses data bersama tanpa interferensi:
-
----
-
 # Proyek Kontrol LED Multi-Thread Menggunakan STM32 dan FreeRTOS
 
 ## Deskripsi
