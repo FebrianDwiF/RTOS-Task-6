@@ -1,7 +1,7 @@
 # Proyek Kontrol LED Multi-Thread Menggunakan STM32 dan FreeRTOS
 
 ## Deskripsi
-Proyek ini adalah implementasi kontrol LED multi-thread pada STM32 menggunakan FreeRTOS. Dua LED utama (LED hijau dan merah) dikendalikan dengan pola kedipan yang berbeda. Sistem ini menggunakan mekanisme critical section dengan `taskENTER_CRITICAL` dan `taskEXIT_CRITICAL` untuk mencegah interferensi dalam akses data bersama (`startFlag`), dengan LED kuning sebagai indikator interferensi.
+Repository ini berisi implementasi RTOS pada STM32F103C8T6 yang mengontrol beberapa LED menggunakan task multitasking. Tiga task utama dibuat: `defaultTask`, `greenLedTask`, dan `redLedTask`. Task `greenLedTask` menyalakan LED hijau dengan interval 500 ms, sementara `redLedTask` menyalakan LED merah dengan interval 100 ms. Keduanya menggunakan critical section untuk akses aman terhadap data bersama (`startFlag`), yang menghindari interferensi antara task. Jika terjadi interferensi, LED biru akan menyala sebagai indikator. Program ini memanfaatkan CMSIS-OS untuk manajemen task dan STM32 HAL untuk konfigurasi GPIO dan clock sistem, memastikan akses yang aman dan berurutan terhadap perangkat keras dalam sistem multitasking.
 
 ## Fitur Utama
 - **Task Hijau (GreenLEDTask)**: Mengontrol LED hijau dengan pola kedipan setiap 0,5 detik.
