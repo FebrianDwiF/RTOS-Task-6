@@ -3,6 +3,8 @@
 ../Core/Src/main.c:190:13:MX_GPIO_Init	1
 ../Core/Src/main.c:224:6:StartDefaultTask	1
 ../Core/Src/main.c:242:6:green_led	1
-../Core/Src/main.c:272:6:red_led	1
-../Core/Src/main.c:294:6:accessSharedData	2
-../Core/Src/main.c:321:6:Error_Handler	1
+../Core/Src/main.c:273:6:red_led	1
+../Core/Src/main.c:296:6:accessSharedData	2
+../Core/Src/main.c:316:6:SimulateReadWriteOperation	2
+../Core/Src/main.c:334:6:HAL_TIM_PeriodElapsedCallback	2
+../Core/Src/main.c:351:6:Error_Handler	1

@@ -253,6 +253,7 @@ void green_led(void const * argument)
 	    accessSharedData();
 	    taskEXIT_CRITICAL(); // Keluar dari critical section
 
+
 	    // Mematikan LED hijau
 	    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_RESET);
 
@@ -283,6 +284,7 @@ void red_led(void const * argument)
 	    accessSharedData();
 	    taskEXIT_CRITICAL(); // Keluar dari critical section
 
+
 	    // Mematikan LED merah
 	    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_1, GPIO_PIN_RESET);
 
@@ -291,29 +293,57 @@ void red_led(void const * argument)
 	  }
   /* USER CODE END red_led */
 }
-void accessSharedData(void)
-{
-  // Cek status startFlag
-  if (startFlag == 1)
-  {
-    // Set flag ke 0
-    startFlag = 0;
-  }
-  else
-  {
-    // Menyalakan LED biru untuk menunjukkan interferensi
-    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, GPIO_PIN_SET);
-  }
+void accessSharedData(void) {
+    if (startFlag == 1) {
+        // Set Start flag to Down to indicate resource is in use
+        startFlag = 0;
+    } else {
+        // Resource contention: Turn on Blue LED
+        HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, GPIO_PIN_RESET);
+    }
 
-  // Simulasi operasi baca/tulis selama 500 ms
-  osDelay(500);
+    // Simulate read/write operations with a delay of 500 milliseconds
+    SimulateReadWriteOperation();
 
-  // Mengatur kembali flag ke 1
-  startFlag = 1;
 
-  // Mematikan LED biru
-  HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, GPIO_PIN_RESET);
+    // Set Start flag back to Up to indicate resource is free
+    startFlag = 1;
+
+    // Turn off Blue LED (if it was turned on during contention)
+    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_3, GPIO_PIN_SET);
 }
+
+void SimulateReadWriteOperation(void) {
+    volatile uint32_t delay_count = 0;
+    const uint32_t delay_target = 400000; // Adjust this value to approximate 500 ms
+
+    // Dummy loop to simulate processing time
+    for (delay_count = 0; delay_count < delay_target; delay_count++) {
+        __asm("nop"); // No Operation: Keeps the processor busy without changing code behavior
+    }
+}
+
+/**
+  * @brief  Period elapsed callback in non blocking mode
+  * @note   This function is called  when TIM4 interrupt took place, inside
+  * HAL_TIM_IRQHandler(). It makes a direct call to HAL_IncTick() to increment
+  * a global variable "uwTick" used as application time base.
+  * @param  htim : TIM handle
+  * @retval None
+  */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  /* USER CODE BEGIN Callback 0 */
+
+  /* USER CODE END Callback 0 */
+  if (htim->Instance == TIM4) {
+    HAL_IncTick();
+  }
+  /* USER CODE BEGIN Callback 1 */
+
+  /* USER CODE END Callback 1 */
+}
+
 /**
   * @brief  This function is executed in case of error occurrence.
   * @retval None
