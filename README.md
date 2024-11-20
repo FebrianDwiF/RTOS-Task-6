@@ -1,6 +1,4 @@
-
 # Proyek Pengendalian LED dengan FreeRTOS pada STM32
-
 Proyek ini menunjukkan bagaimana menggunakan **FreeRTOS** pada mikrokontroler STM32 untuk mengontrol beberapa LED dengan manajemen tugas dan sinkronisasi yang tepat.
 
 ## Fitur
